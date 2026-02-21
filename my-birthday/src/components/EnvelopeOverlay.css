@@ -144,7 +144,7 @@
 /* Badge 30 en haut à droite, au-dessus de tout le contenu invite */
 .envclose-badge-wrap {
   position: fixed;
-  top: 12rem;
+  top: 8rem;
   right: 3.2rem;
   z-index: 10001;
   pointer-events: none;
@@ -166,8 +166,8 @@
 /* mbclown en bas à droite sur l'invite */
 .envclose-clown-wrap {
   position: fixed;
-  bottom: 1rem;
-  right: 1rem;
+ top: 22rem;
+  right: 7rem;
   z-index: 10001;
   pointer-events: none;
 }
