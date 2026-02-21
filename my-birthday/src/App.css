@@ -1,0 +1,66 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.photos-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.photos-layer .photo-thumb {
+  pointer-events: auto;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: none;
+  transform-origin: center center;
+  transition: transform 0.15s ease;
+}
+
+.photos-layer .photo-thumb:hover {
+  z-index: 100;
+}
+
+.photos-layer .photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photos-layer .photo-thumb.photo-spin {
+  animation: spin-360 0.6s ease-in-out forwards;
+}
+
+@keyframes spin-360 {
+  from {
+    transform: rotate(var(--start-deg, 0deg));
+  }
+  to {
+    transform: rotate(calc(var(--start-deg, 0) + 360deg));
+  }
+}
+
+.placeholder-text {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+
+.placeholder-text code {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+}
