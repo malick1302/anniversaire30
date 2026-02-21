@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30vh;
+ 
 }
 
 .envclose-wrap {
@@ -87,6 +87,8 @@
 .envclose-open-wrap {
   opacity: 0;
   will-change: transform, opacity;
+  transform-origin: center center;
+  transition: none; /* saccadé = pas de transition entre les étapes */
 }
 
 .envclose-open-img {
@@ -99,3 +101,43 @@
   height: auto;
   object-fit: contain;
 }
+
+/* Contenu animé (GSAP anime le wrap, les étapes saccadées s’appliquent sur l’inner) */
+.envclose-open-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  transition: none;
+}
+
+/* Agrandissement invite : remplit tout l’écran (étapes 1–3) puis se recentre (étape 4) */
+.envclose-open-inner--expand-1 {
+  transform: scale(1.8);
+}
+
+.envclose-open-inner--expand-2 {
+  transform: scale(2.5);
+}
+
+.envclose-open-inner--expand-3 {
+  transform: scale(3.2);
+}
+
+.envclose-open-inner--expand-4 {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: none;
+
+}
+
+.envclose-open-inner--expand-4 .envclose-open-img {
+  min-width: 50vh;
+  object-fit: contain;
+  object-position: center;
+  transform: scale(1.25);
+}
+

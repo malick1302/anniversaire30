@@ -3,9 +3,19 @@ import { createPortal } from 'react-dom'
 import gsap from 'gsap'
 import envcloseUrl from '../assets/enveloppe/envclose.png'
 import envopenUrl from '../assets/enveloppe/envopen.png'
+import open1Url from '../assets/enveloppe/open1.png'
+import open2Url from '../assets/enveloppe/open2.png'
+import open3Url from '../assets/enveloppe/open3.png'
+import inviteUrl from '../assets/enveloppe/invite.png'
 import './EnvelopeOverlay.css'
 
 const TEXT = 'Clique sur l\'enveloppe'
+
+// Séquence après le clic : envopen → open1 → open2 → open3 → invite (style GIF, rapide)
+const OPEN_SEQUENCE = [envopenUrl, open1Url, open2Url, open3Url, inviteUrl]
+const FRAME_DURATION_MS = 180 // ms par image
+const INVITE_EXPAND_DELAY_MS = 400 // délai avant de lancer l'agrandissement
+const INVITE_EXPAND_STEP_MS = 120 // ms entre chaque étape (saccadé)
 
 function EnvelopeOverlay() {
   const wrapRef = useRef(null)
@@ -14,6 +24,8 @@ function EnvelopeOverlay() {
   const [error, setError] = useState(false)
   const [letters, setLetters] = useState([])
   const [isOpened, setIsOpened] = useState(false)
+  const [openStep, setOpenStep] = useState(0)
+  const [expandStep, setExpandStep] = useState(0) // 0 = pas d'agrandissement, 1-4 = étapes invite
 
   useEffect(() => {
     setLetters(TEXT.split(''))
@@ -56,6 +68,30 @@ function EnvelopeOverlay() {
       { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.2)' }
     )
   }, [isOpened])
+
+  // Séquence type GIF : changement d’image sans effet, rapide
+  useEffect(() => {
+    if (!isOpened || openStep >= OPEN_SEQUENCE.length - 1) return
+    const t = setTimeout(() => {
+      setOpenStep((s) => Math.min(s + 1, OPEN_SEQUENCE.length - 1))
+    }, FRAME_DURATION_MS)
+    return () => clearTimeout(t)
+  }, [isOpened, openStep])
+
+  // Agrandissement invite en 4 étapes saccadées → 20px de marge, centré
+  useEffect(() => {
+    if (!isOpened || openStep !== OPEN_SEQUENCE.length - 1) return
+    const t0 = setTimeout(() => setExpandStep(1), INVITE_EXPAND_DELAY_MS)
+    const t1 = setTimeout(() => setExpandStep(2), INVITE_EXPAND_DELAY_MS + INVITE_EXPAND_STEP_MS)
+    const t2 = setTimeout(() => setExpandStep(3), INVITE_EXPAND_DELAY_MS + INVITE_EXPAND_STEP_MS * 2)
+    const t3 = setTimeout(() => setExpandStep(4), INVITE_EXPAND_DELAY_MS + INVITE_EXPAND_STEP_MS * 3)
+    return () => {
+      clearTimeout(t0)
+      clearTimeout(t1)
+      clearTimeout(t2)
+      clearTimeout(t3)
+    }
+  }, [isOpened, openStep])
 
   const handleEnvelopeClick = () => {
     const wrap = wrapRef.current
@@ -103,7 +139,11 @@ function EnvelopeOverlay() {
           </button>
         ) : (
           <div className="envclose-open-wrap" ref={openWrapRef}>
-            <img src={envopenUrl} alt="" className="envclose-open-img" />
+            <div
+              className={`envclose-open-inner${expandStep > 0 ? ` envclose-open-inner--expand-${expandStep}` : ''}`}
+            >
+              <img src={OPEN_SEQUENCE[openStep]} alt="" className="envclose-open-img" />
+            </div>
           </div>
         )}
       </div>
