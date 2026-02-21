@@ -131,7 +131,7 @@
   align-items: center;
   justify-content: center;
   transform: none;
-
+  padding-bottom: 15vh;
 }
 
 .envclose-open-inner--expand-4 .envclose-open-img {
@@ -139,5 +139,45 @@
   object-fit: contain;
   object-position: center;
   transform: scale(1.25);
+}
+
+/* Badge 30 en haut à droite, au-dessus de tout le contenu invite */
+.envclose-badge-wrap {
+  position: fixed;
+  top: 12rem;
+  right: 3.2rem;
+  z-index: 10001;
+  pointer-events: none;
+}
+
+.envclose-invite-badge {
+  display: block;
+  width: clamp(60px, 12vw, 100px);
+  height: auto;
+  object-fit: contain;
+  animation: envclose-badge-spin 4s linear infinite;
+}
+
+@keyframes envclose-badge-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* mbclown en bas à droite sur l'invite */
+.envclose-clown-wrap {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10001;
+  pointer-events: none;
+}
+
+.envclose-invite-clown {
+  position: fixed;
+  bottom: 10rem;
+  left: 16rem;
+  z-index: 10001;
+  pointer-events: none;
+  width: 120px;
 }
 

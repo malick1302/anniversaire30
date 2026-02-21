@@ -1,0 +1,40 @@
+.invite-actions-container {
+  position: fixed;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  padding: 1rem 1rem max(1rem, env(safe-area-inset-bottom));
+  pointer-events: auto;
+}
+
+.invite-actions-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  padding: 0.65rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  background: #A41623;
+  box-shadow: 0 2px 8px rgba(164, 22, 35, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.invite-actions-btn:hover {
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(164, 22, 35, 0.5);
+}
+
+.invite-actions-btn:active {
+  transform: scale(0.98);
+}

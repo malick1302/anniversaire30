@@ -7,6 +7,9 @@ import open1Url from '../assets/enveloppe/open1.png'
 import open2Url from '../assets/enveloppe/open2.png'
 import open3Url from '../assets/enveloppe/open3.png'
 import inviteUrl from '../assets/enveloppe/invite.png'
+import badge30Url from '../assets/photos/30.png'
+import mbclownUrl from '../assets/photos/mbclown.png'
+import InviteActions from './InviteActions'
 import './EnvelopeOverlay.css'
 
 const TEXT = 'Clique sur l\'enveloppe'
@@ -109,9 +112,10 @@ function EnvelopeOverlay() {
   }
 
   const overlay = (
-    <div className="envclose-overlay" aria-hidden="true">
-      <div className="envclose-content">
-        {!isOpened ? (
+    <>
+      <div className="envclose-overlay" aria-hidden="true">
+        <div className="envclose-content">
+          {!isOpened ? (
           <button
             type="button"
             className="envclose-wrap envclose-wrap--clickable"
@@ -146,8 +150,20 @@ function EnvelopeOverlay() {
             </div>
           </div>
         )}
+        </div>
       </div>
-    </div>
+      {expandStep === 4 && (
+        <>
+          <div className="envclose-badge-wrap">
+            <img src={badge30Url} alt="" className="envclose-invite-badge" />
+          </div>
+          <div className="envclose-clown-wrap">
+            <img src={mbclownUrl} alt="" className="envclose-invite-clown" />
+          </div>
+        </>
+      )}
+      <InviteActions visible={expandStep === 4} />
+    </>
   )
 
   return typeof document !== 'undefined' ? createPortal(overlay, document.body) : null
