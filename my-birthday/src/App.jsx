@@ -3,12 +3,13 @@ import './App.css'
 import EnvelopeOverlay from './components/EnvelopeOverlay'
 
 // Charge toutes les images du dossier src/assets/photos (extensions : jpg, jpeg, png, gif, webp)
-// On exclut 30.png, réservé au badge sur l'invite
+// On exclut 30.png et mbclown.png (réservés à l'invite / badge) en filtrant par chemin source,
+// car en build l'URL est hachée (ex. 30-A6697GsI.png) et ne contient plus "30.png"
 const photoModules = import.meta.glob('./assets/photos/*.{jpg,jpeg,png,gif,webp}', { eager: true, as: 'url' })
-const photoUrls = Object.values(photoModules)
-  .map((m) => (typeof m === 'string' ? m : m?.default))
+const photoUrls = Object.entries(photoModules)
+  .filter(([path]) => !path.includes('30.png') && !path.includes('mbclown.png'))
+  .map(([, m]) => (typeof m === 'string' ? m : m?.default))
   .filter(Boolean)
-  .filter((url) => !url.includes('30.png') && !url.includes('mbclown.png'))
 
 // Chaque photo apparaît plusieurs fois pour tapisser tout l'écran (bords inclus)
 const REPLICAS = 28
