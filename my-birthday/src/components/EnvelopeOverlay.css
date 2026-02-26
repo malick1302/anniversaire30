@@ -181,10 +181,10 @@
   width: 120px;
 }
 
-/* Mobile : clown plus bas */
+/* Mobile : clown remonté de 10% */
 @media (max-width: 768px) {
   .envclose-invite-clown {
-    bottom: calc(10rem - 80px);
+    bottom: calc(10rem - 80px + 10vh);
     width: 100px;
   }
 }
