@@ -166,7 +166,7 @@
 /* mbclown en bas à droite sur l'invite */
 .envclose-clown-wrap {
   position: fixed;
-  bottom: calc(50rem - 20px);
+  bottom: 50rem;
   right: 7rem;
   z-index: 10001;
   pointer-events: none;
@@ -174,7 +174,7 @@
 
 .envclose-invite-clown {
   position: fixed;
-  bottom: 10rem;
+  bottom: calc(10rem - 20px);
   left: 16rem;
   z-index: 10001;
   pointer-events: none;
