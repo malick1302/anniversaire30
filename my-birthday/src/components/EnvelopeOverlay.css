@@ -145,7 +145,7 @@
 .envclose-badge-wrap {
   position: fixed;
   top: 8rem;
-  right: 3.2rem;
+  right: calc(3.2rem + 10px);
   z-index: 10001;
   pointer-events: none;
 }
