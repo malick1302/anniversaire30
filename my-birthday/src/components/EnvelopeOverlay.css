@@ -184,7 +184,7 @@
 /* Mobile : clown remonté de 10% */
 @media (max-width: 768px) {
   .envclose-invite-clown {
-    bottom: calc(10rem - 80px + 10vh);
+    bottom: calc(10rem - 60px);
     width: 100px;
   }
 }
